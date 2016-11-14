@@ -1,6 +1,6 @@
 // Init App
 var myApp = new Framework7({
-    modalTitle: '',
+    modalTitle: 'Framework7',
     // Enable Material theme
     material: true,
 });
@@ -1067,6 +1067,7 @@ $$('.panel-left, .panel-right').on('close', function () {
 /* ===== Generate Content Dynamically ===== 
 var dynamicPageIndex = 0;
 function createContentPage() {
+
     mainView.router.loadContent(
         '  <!-- Page, data-page contains page name-->' +
         '  <div data-page="dynamic-content" class="page">' +
@@ -1087,7 +1088,166 @@ function createContentPage() {
         '  </div>'
     );
     return;
+}	*/
+
+
+$$(document).on('click', '.ks-generate-page', createContentPage);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			/* ================================ STUDENT School Year Page ================================== */
+			/* ================================ STUDENT School Year Page ================================== */
+			/* ================================ STUDENT School Year Page ================================== */
+			/* ================================ STUDENT School Year Page ================================== */
+			/* ================================ STUDENT School Year Page ================================== */
+var label = "2016-2017";
+function studentsy() {
+//console.log(onclick_data);
+    mainView.router.loadContent(
+	
+        '<div data-page="list-view" class="page">' +
+		'  <div class="navbar"><div class="navbar-inner">' +
+		'	  <div class="left"><a href="index.html" class="back link icon-only"><i class="icon icon-back"></i></a></div>' +
+		'	  <div class="center" id="header_title">Choose Semester</div>' +
+		'	  <div class="right"><a href="#" class="open-panel link icon-only"><i class="icon icon-bars"></i></a></div>' +
+		'  </div></div>' +
+		'  <div class="page-content">' +
+		'	<!--<div class="content-block-title">Links, no icons</div>-->' +
+		'	<div class="list-block">' +
+		'	  <ul>' +
+		'		<li><div class="item-divider"><strong><b>'+ (label) +'</b></strong></div></li>' +
+		'		<li><a href="#" class="item-link item-content"><div class="item-inner" onclick="studentsubj();">' +
+		'			<div class="item-title">1st Semester</div>' +
+		'		</div></a></li>' +
+		'		<li><a href="#" class="item-link item-content"><div class="item-inner" onclick="studentsubj();">' +
+		'			<div class="item-title">2nd Semester</div>' +
+		'		</div></a></li>' +
+		'		<br><br>' +
+		'		<li><div class="item-divider"><strong><b>S.Y. 2017-2018</b></strong></div></li>' +
+		'		<li><a href="#" class="item-link item-content"><div class="item-inner" onclick="studentsubj();">' +
+		'			<div class="item-title">1st Semester</div>' +
+		'		</div></a></li>' +
+		'		<li><a href="#" class="item-link item-content"><div class="item-inner" onclick="studentsubj();">' +
+		'			<div class="item-title">2nd Semester</div>' +
+		'		</div></a></li>' +
+		'	  </ul>' +
+		'	</div>' +
+		'  </div>' +
+		'</div>'
+    );
+    return;
 }
-$$(document).on('click', '.ks-generate-page', createContentPage); */
+
+			/* ================================ STUDENT School Year Page ================================== */
+			/* ================================ STUDENT School Year Page ================================== */
+			/* ================================ STUDENT School Year Page ================================== */
+			/* ================================ STUDENT School Year Page ================================== */
+			/* ================================ STUDENT School Year Page ================================== */
 
 
+			
+		
+			
+$$(document).on('pageAfterAnimation','.page[data-page="studentsy"]',function(e){
+
+	alert("test");
+})
+			
+			/* ================================ STUDENT Grade Year Page ================================== */
+			/* ================================ STUDENT Grade Year Page ================================== */
+			/* ================================ STUDENT Grade Year Page ================================== */
+			/* ================================ STUDENT Grade Year Page ================================== */
+			/* ================================ STUDENT Grade Year Page ================================== 
+
+function studentsubj() {
+    mainView.router.loadContent(
+		'<div data-page="list-view" class="page">' +
+		'  <div class="navbar"><div class="navbar-inner">' +
+		'	  <div class="left"><a href="index.html" class="back link icon-only"><i class="icon icon-back"></i></a></div>' +
+		'	  <div class="center">S.Y. 2016-2017</div>' +
+		'	  <div class="right"><a href="#" class="open-panel link icon-only"><i class="icon icon-bars"></i></a></div>' +
+		'  </div></div>' +
+		'  <div class="page-content">' +
+		'	<div class="content-block-title"><center><strong>1st Semester</strong></center></div>' +
+		'	<div class="list-block">' +
+		'	  <ul>' +
+		'		<li><div class="item-divider"><strong><b>Math</b></strong></div></li>' +
+		'		<li><div class="item-content"><div class="item-inner">' +
+		'			  <div class="item-title">Midterm</div>' +
+		'			  <div class="item-after"> <span class="badge color-green">1.25</span></div>' +
+		'		</div></div></li>' +
+		'		<li><div class="item-content"><div class="item-inner">' +
+		'			  <div class="item-title">Final</div>' +
+		'			  <div class="item-after"> <span class="badge color-green">1.50</span></div>' +
+		'		</div></div></li>' +
+		'		<br><br>' +
+		'		<li><div class="item-divider"><strong><b>Science</b></strong></div></li>' +
+		'		<li><div class="item-content"><div class="item-inner">' +
+		'			  <div class="item-title">Midterm</div>' +
+		'			  <div class="item-after"> <span class="badge color-blue">2.50</span></div>' +
+		'		</div></div></li>' +
+		'		<li><div class="item-content"><div class="item-inner">' +
+		'			  <div class="item-title">Final</div>' +
+		'			  <div class="item-after"> <span class="badge color-orange">3.00</span></div>' +
+		'		</div></div></li>' +
+		'		<br><br>' +
+		'		<li><div class="item-divider"><strong><b>English</b></strong></div></li>' +
+		'		<li><div class="item-content"><div class="item-inner">' +
+		'			  <div class="item-title">Midterm</div>' +
+		'			  <div class="item-after"> <span class="badge color-red">5.00</span></div>' +
+		'		</div></div></li>' +
+		'		<li><div class="item-content"><div class="item-inner">' + 
+		'			  <div class="item-title">Final</div>' +
+		'			  <div class="item-after"> <span class="badge">INC</span></div>' +
+		'		</div></div></li>' +
+		'	  </ul>' +
+		'	</div>' +
+		' </div>' +
+		'</div>' +
+    );
+    return;
+}
+			
+			/* ================================ STUDENT School Year Page ================================== */
+			/* ================================ STUDENT School Year Page ================================== */
+			/* ================================ STUDENT School Year Page ================================== */
+			/* ================================ STUDENT School Year Page ================================== */
+			/* ================================ STUDENT School Year Page ================================== */
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			/* ================================ CHAIRMAN Search Teacher ================================== */
+			/* ================================ CHAIRMAN Search Teacher ================================== */
+			/* ================================ CHAIRMAN Search Teacher ================================== */
+			/* ================================ CHAIRMAN Search Teacher ================================== */
+			/* ================================ CHAIRMAN Search Teacher ================================== 
+			
+function chairmansearch() {
+    mainView.router.loadContent(
+		
+    );
+    return;
+}
+			
+			/* ================================ CHAIRMAN Search Teacher ================================== */
+			/* ================================ CHAIRMAN Search Teacher ================================== */
+			/* ================================ CHAIRMAN Search Teacher ================================== */
+			/* ================================ CHAIRMAN Search Teacher ================================== */
+			/* ================================ CHAIRMAN Search Teacher ================================== */

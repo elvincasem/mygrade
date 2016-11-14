@@ -10,9 +10,9 @@
     <title>College of Computer Science DMMMSU-SLUC</title>
     <link rel="stylesheet" href="build/css/framework7.material.css">
     <link rel="stylesheet" href="build/css/framework7.material.colors.css">
-    <link href="http://fonts.googleapis.com/css?family=Roboto:400,300,500,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/fonts.css" type="text/css">
     <link rel="stylesheet" href="css/kitchen-sink.css">
-    <link rel="icon" href="img/icon.png">
+    <link rel="icon" href="img/ccslogo.png">
   </head>
   <body onload="check_session();" class="theme-pink">
     <div class="statusbar-overlay"></div>
@@ -31,7 +31,17 @@
               <div class="list-block">
                 <ul>
                   <li>
-				  <a href="index.html" class="item-link close-panel">
+				  <a href="pages/register.html" class="item-link close-panel">
+                    <div class="item-content">
+                        <!--<div class="item-media"><i class="icon icon-f7"></i></div>-->
+                        <div class="item-inner">
+                          <div class="item-title">Register Student</div>
+                        </div>
+                    </div>
+				  </a>
+				  </li>
+				  <li>
+				  <a href="index.html" class="item-link close-panel" onclick="localStorage.clear();">
                     <div class="item-content">
                         <!--<div class="item-media"><i class="icon icon-f7"></i></div>-->
                         <div class="item-inner">
@@ -57,19 +67,19 @@
 			
               <!--<div class="content-block-title">Welcome To Framework7</div>-->
               <div class="content-block">
-				<a href="loginstudent.html" class="button button-raised button-fill color-pink">
+				<a href="pages/loginstudent.html" class="button button-raised button-fill color-pink">
 					Student
 				</a>
 			  </div>
               
 			  <div class="content-block">
-				<a href="loginteacher.html" class="button button-raised button-fill color-pink">
+				<a href="pages/loginteacher.html" class="button button-raised button-fill color-pink">
 					Teacher
 				</a>
 			  </div>
 			  
 			  <div class="content-block">
-				<a href="loginchairman.html" class="button button-raised button-fill color-pink">
+				<a href="pages/loginchairman.html" class="button button-raised button-fill color-pink">
 					Chairman
 				</a>
 			  </div>
@@ -120,5 +130,6 @@
 
     <script type="text/javascript" src="build/js/framework7.js"></script>
     <script type="text/javascript" src="js/kitchen-sink.js"></script>
+	<script type="text/javascript" src="js/custom.js"></script>
   </body>
 </html>
