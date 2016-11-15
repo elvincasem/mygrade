@@ -21,7 +21,7 @@
         <icon src="icon.png" gap:platform="android" gap:qualifier="xxhdpi" />
         <icon src="icon.png" gap:platform="android" gap:qualifier="fr-xxhdpi" />
 		<preference name="debuggable" value="false"/>
-        <plugin name="com.indigoway.cordova.whitelist.whitelistplugin" spec="1.1.1" source="pgb" />
+        <plugin name="ordova-plugin-whitelist" spec="1.3.0" source="npm" />
         <allow-navigation href="*" />
     </widget>
 
