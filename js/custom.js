@@ -125,8 +125,8 @@ function studentpreregister(){
 			'<a href="index.html" id="registerstudentsuccess" style="display:none;">success</a>'+
 			'<a onclick="registerusernamepassword();" class="button button-raised button-fill color-pink">Register</a>'+
 		'</p></div>');
-		}else if (data == 0){
-		myApp.alert('<center class="color-deeporange">Sorry you are not yet enrolled in the system. Please consult <br>your Chairman.<center>');
+		}else{
+		myApp.alert('<center class="color-deeporange"><strong>Access Denied</strong><br>Either you are not registered in the web app version or an account with this ID Number already exists in the system.<center>');
 		}
 		
 	},JSON);
@@ -138,14 +138,34 @@ function registerusernamepassword(){
 	var suname = document.getElementById("registerusername").value;
 	var spass = document.getElementById("registerpassword").value;
 
-	$$.post(global_url, {action: 'registerusernamepassword', studentid: sid, username: suname, password: spass}, function (data) {
+	/* $$.post(global_url, {action: 'registerusernamepassword', studentid: sid, username: suname, password: spass}, function (data) {
 		
 		console.log(data);
 		myApp.alert('<center><strong>Registration Successful!</strong><br>Please login with your <strong>Username</strong> and <strong>password</strong>.</center>');
 		var success = document.getElementById("registerstudentsuccess");
 		success.click();
 		
+	},JSON); */
+	
+	
+	if(sid == "" || suname == "" || spass == ""){
+	myApp.alert('<center><strong>Please fill all inputs</strong></center>');
+	}else{
+	
+	$$.post(global_url, {action: 'registerusernamepassword', studentid: sid, username: suname, password: spass}, function (data) {
+		
+		console.log(data);
+		
+		//if(data == 1){
+			myApp.alert('<center><strong>Registration Successful!</strong><br>Please login with your <strong>Username</strong> and <strong>password</strong>.</center>');
+			var register = document.getElementById("registerstudentsuccess");
+			register.click();
+		//}else{
+		//	myApp.alert('<center><strong>Sorry</strong><br>This account already exists in<br>the system. Please report this <br>issue to your adviser</center>');
+		//}
+		
 	},JSON);
+	}
 	
 }
 
@@ -269,7 +289,7 @@ function teachershowfirstsem(sem){
 			console.log(datas);
 			
 			for(var i = 0; i<datas.length; i++){
-				$$('#displaysubj').append('<li class="accordion-item"><a href="#" class="item-link item-content item-divider"><div class="item-inner"><div class="item-title"><strong><b>'+datas[i].coursetitle+'</b></strong></div></div></a><div class="accordion-item-content"><div class="list-block"><ul><li><a onclick="teacherallstudents('+datas[i].courseid+',1);" href="pages/addstudent.html" class="item-link item-content item-inner item-title">Add Students to Subject</a></li><li><a onclick="teacherallstudentssection('+datas[i].courseid+',1);" href="pages/addstudentyear.html" class="item-link item-content item-inner item-title">Add Students to Subject by Section</a></li><li><a onclick="teachershowenrolled('+datas[i].courseid+');" href="pages/enrolledstudents.html" class="item-link item-content item-inner item-title">Student Grades</a></li></ul></div></div></li>');
+				$$('#displaysubj').append('<li class="accordion-item"><a href="#" class="item-link item-content item-divider"><div class="item-inner"><div class="item-title"><strong><b>'+datas[i].coursetitle+'</b></strong></div></div></a><div class="accordion-item-content"><div class="list-block"><ul><li><a onclick="teacherallstudents('+datas[i].courseid+',1);" href="pages/addstudent.html" class="item-link item-content item-inner item-title">Add Students to Subject</a></li><li><a onclick="teacherallstudentssection('+datas[i].courseid+',1);" href="pages/addstudentyear.html" class="item-link item-content item-inner item-title">Add Students to Subject by Section</a></li><li><a onclick="teacherremoveenrolled('+datas[i].courseid+');" href="pages/removestudents.html" class="item-link item-content item-inner item-title">Remove Students</a></li><li><a onclick="teachershowenrolled('+datas[i].courseid+');" href="pages/enrolledstudents.html" class="item-link item-content item-inner item-title">Student Grades</a></li></ul></div></div></li>');
 			}	
 		},JSON);	
 	})
@@ -292,7 +312,7 @@ function teachershowsecondsem(sem){
 			console.log(datas);
 			
 			for(var i = 0; i<datas.length; i++){
-				$$('#displaysubj').append('<li class="accordion-item"><a href="#" class="item-link item-content item-divider"><div class="item-inner"><div class="item-title"><strong><b>'+datas[i].coursetitle+'</b></strong></div></div></a><div class="accordion-item-content"><div class="list-block"><ul><li><a onclick="teacherallstudents('+datas[i].courseid+',2);" href="pages/addstudent.html" class="item-link item-content item-inner item-title">Add Students to Subject</a></li><li><a onclick="teacherallstudentssection('+datas[i].courseid+',2);" href="pages/addstudentyear.html" class="item-link item-content item-inner item-title">Add Students to Subject by Section</a></li><li><a onclick="teachershowenrolled('+datas[i].courseid+');" href="pages/enrolledstudents.html" class="item-link item-content item-inner item-title">Student Grades</a></li></ul></div></div></li>');
+				$$('#displaysubj').append('<li class="accordion-item"><a href="#" class="item-link item-content item-divider"><div class="item-inner"><div class="item-title"><strong><b>'+datas[i].coursetitle+'</b></strong></div></div></a><div class="accordion-item-content"><div class="list-block"><ul><li><a onclick="teacherallstudents('+datas[i].courseid+',2);" href="pages/addstudent.html" class="item-link item-content item-inner item-title">Add Students to Subject</a></li><li><a onclick="teacherallstudentssection('+datas[i].courseid+',2);" href="pages/addstudentyear.html" class="item-link item-content item-inner item-title">Add Students to Subject by Section</a></li><li><a onclick="teacherremoveenrolled('+datas[i].courseid+');" href="pages/removestudents.html" class="item-link item-content item-inner item-title">Remove Students</a></li><li><a onclick="teachershowenrolled('+datas[i].courseid+');" href="pages/enrolledstudents.html" class="item-link item-content item-inner item-title">Student Grades</a></li></ul></div></div></li>');
 			}	
 		},JSON);	
 	})
@@ -337,26 +357,11 @@ function addstudent(studentid,subjid){
 	
 }
 
-
-
-/////////////////////////////SHOW ENROLL BY SECTION HERE/////////////////////////
-/////////////////////////////SHOW ENROLL BY SECTION HERE/////////////////////////
-/////////////////////////////SHOW ENROLL BY SECTION HERE/////////////////////////
 function teacherallstudentssection(cid,sem){
-	
-	
-	//var teacherprofile = JSON.parse(localStorage.getItem("teacherprofile"));
-	//var tid = document.getElementById("teacher_id").value = teacherprofile.teacherid;
-	//var yr = document.getElementById("enrollyear").value;
-	//var sec = document.getElementById("enrollsection").value;
 
 	$$(document).on('pageAfterAnimation','.page[data-page="addstudentyear"]',function(e){
 		document.getElementById("input_cid").value = cid;
 		document.getElementById("input_sem").value = sem;
-	//document.getElementById('enroll_btn').innerHTML="";
-		//$$.post(global_url, {action: 'sample'}, function (data) {
-			//$$('#enroll_btn').append('<a href="#" onclick="myApp.alert('+cid+','+sem+','+tid+')" class="button button-fill color-pink">Enroll Year and Section</a>');				
-		//},JSON);
 	})
 
 }
@@ -372,12 +377,6 @@ function addyearandsection(){
 
 	var cid = document.getElementById("input_cid").value
 	var sem = document.getElementById("input_sem").value
-
-	//myApp.alert(tid);
-	//myApp.alert(yr);
-	//myApp.alert(sec);
-	//myApp.alert(cid);
-	//myApp.alert(sem);
 	myApp.confirm('Enroll this year and section to the subject?', function () {
 		
 		$$.post(global_url, {action: 'enrollyearsection', teacherid: tid, year: yr, section: sec, courseid: cid, semester: sem}, function (data) {
@@ -389,25 +388,92 @@ function addyearandsection(){
         
     });
 
-	//$$(document).on('pageAfterAnimation','.page[data-page="addstudentyear"]',function(e){
-		//document.getElementById("input_cid").value = cid;
-		//document.getElementById("input_sem").value = sem;
-	//document.getElementById('enroll_btn').innerHTML="";
-		//$$.post(global_url, {action: 'sample'}, function (data) {
-			//$$('#enroll_btn').append('<a href="#" onclick="myApp.alert('+cid+','+sem+','+tid+')" class="button button-fill color-pink">Enroll Year and Section</a>');				
-		//},JSON);
-	//})
-
 }
-
-/////////////////////////////SHOW ENROLL BY SECTION HERE/////////////////////////
-/////////////////////////////SHOW ENROLL BY SECTION HERE/////////////////////////
-/////////////////////////////SHOW ENROLL BY SECTION HERE/////////////////////////
-
 
 
 function teachershowenrolled(courseid){
 $$(document).on('pageAfterAnimation','.page[data-page="enrolledstudents"]',function(e){
+	
+	var teacherprofile = JSON.parse(localStorage.getItem("teacherprofile"));
+	var teacherid = teacherprofile.teacherid;
+	
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+	var yyyy = today.getFullYear();
+
+	if(dd<10) {
+		dd='0'+dd
+	} 
+	if(mm<10) {
+		mm='0'+mm
+	} 
+	today = yyyy+'-'+mm+'-'+dd;
+	
+	$$.post(global_url, {action: 'displayenrolled', sub: courseid, tid: teacherid}, function (data,status) {
+		
+		document.getElementById('displayenrolled').innerHTML="";
+		console.log(data);
+		var datas = JSON.parse(data);
+		console.log(datas);
+		
+		//if(data.deadlinedate <= today){
+		//	document.getElementById('displaydeadline').value = "You met your deadline.";
+		//}else{
+		//	
+		//}
+		
+		for(var i = 0; i<datas.length; i++){
+			
+			
+			if(datas[i].deadlinedate <= today){
+				
+				document.getElementById('displaydeadline').innerHTML = "You met your deadline";
+				
+				if(datas[i].grade == 1.00 || datas[i].grade == 1.25 || datas[i].grade == 1.50 || datas[i].grade ==  1.75){
+				$$('#displayenrolled').append('<li><a href="#" class="item-link item-content item-inner item-title" disabled>('+datas[i].section+') '+datas[i].fname+' '+datas[i].mi+' '+datas[i].lname+'<div class="item-after"><span class="badge color-green">'+datas[i].grade+'</span></div></a></li>');
+				}else if(datas[i].grade == 2.00 || datas[i].grade == 2.25 || datas[i].grade == 2.50 || datas[i].grade == 2.75){
+				$$('#displayenrolled').append('<li><a href="#" class="item-link item-content item-inner item-title" disabled>('+datas[i].section+') '+datas[i].fname+' '+datas[i].mi+' '+datas[i].lname+'<div class="item-after"><span class="badge color-blue">'+datas[i].grade+'</span></div></a></li>');
+				}else if(datas[i].grade == 3.00){
+				$$('#displayenrolled').append('<li><a href="#" class="item-link item-content item-inner item-title" disabled>('+datas[i].section+') '+datas[i].fname+' '+datas[i].mi+' '+datas[i].lname+'<div class="item-after"><span class="badge color-orange">'+datas[i].grade+'</span></div></a></li>');
+				}else if(datas[i].grade == 5.00){
+				$$('#displayenrolled').append('<li><a href="#" class="item-link item-content item-inner item-title" disabled>('+datas[i].section+') '+datas[i].fname+' '+datas[i].mi+' '+datas[i].lname+'<div class="item-after"><span class="badge color-red">'+datas[i].grade+'</span></div></a></li>');
+				}else if(datas[i].grade == "INC"){
+				$$('#displayenrolled').append('<li><a href="#" class="item-link item-content item-inner item-title" disabled>('+datas[i].section+') '+datas[i].fname+' '+datas[i].mi+' '+datas[i].lname+'<div class="item-after"><span class="badge">'+datas[i].grade+'</span></div></a></li>');
+				}else if(datas[i].grade == "0"){
+				$$('#displayenrolled').append('<li><a href="#" class="item-link item-content item-inner item-title" disabled>('+datas[i].section+') '+datas[i].fname+' '+datas[i].mi+' '+datas[i].lname+'<div class="item-after"><span class="badge color-pink">'+datas[i].grade+'</span></div></a></li>');
+				}else{
+				$$('#displayenrolled').append('<li><a href="#" class="item-link item-content item-inner item-title" disabled>('+datas[i].section+') '+datas[i].fname+' '+datas[i].mi+' '+datas[i].lname+'<div class="item-after"><span class="badge color-pink">0</span></div></a></li>');}
+			}else{
+				document.getElementById('displaydeadline').innerHTML = "You can edit or input grade until the deadline.";
+				
+				if(datas[i].grade == 1.00 || datas[i].grade == 1.25 || datas[i].grade == 1.50 || datas[i].grade ==  1.75){
+				$$('#displayenrolled').append('<li><a href="pages/editgrade.html" onclick="shownameoneditgrade('+datas[i].studentID+');" class="item-link item-content item-inner item-title">('+datas[i].section+') '+datas[i].fname+' '+datas[i].mi+' '+datas[i].lname+'<div class="item-after"><span class="badge color-green">'+datas[i].grade+'</span></div></a></li>');
+				}else if(datas[i].grade == 2.00 || datas[i].grade == 2.25 || datas[i].grade == 2.50 || datas[i].grade == 2.75){
+				$$('#displayenrolled').append('<li><a href="pages/editgrade.html" onclick="shownameoneditgrade('+datas[i].studentID+');" class="item-link item-content item-inner item-title">('+datas[i].section+') '+datas[i].fname+' '+datas[i].mi+' '+datas[i].lname+'<div class="item-after"><span class="badge color-blue">'+datas[i].grade+'</span></div></a></li>');
+				}else if(datas[i].grade == 3.00){
+				$$('#displayenrolled').append('<li><a href="pages/editgrade.html" onclick="shownameoneditgrade('+datas[i].studentID+');" class="item-link item-content item-inner item-title">('+datas[i].section+') '+datas[i].fname+' '+datas[i].mi+' '+datas[i].lname+'<div class="item-after"><span class="badge color-orange">'+datas[i].grade+'</span></div></a></li>');
+				}else if(datas[i].grade == 5.00){
+				$$('#displayenrolled').append('<li><a href="pages/editgrade.html" onclick="shownameoneditgrade('+datas[i].studentID+');" class="item-link item-content item-inner item-title">('+datas[i].section+') '+datas[i].fname+' '+datas[i].mi+' '+datas[i].lname+'<div class="item-after"><span class="badge color-red">'+datas[i].grade+'</span></div></a></li>');
+				}else if(datas[i].grade == "INC"){
+				$$('#displayenrolled').append('<li><a href="pages/editgrade.html" onclick="shownameoneditgrade('+datas[i].studentID+');" class="item-link item-content item-inner item-title">('+datas[i].section+') '+datas[i].fname+' '+datas[i].mi+' '+datas[i].lname+'<div class="item-after"><span class="badge">'+datas[i].grade+'</span></div></a></li>');
+				}else if(datas[i].grade == "0"){
+				$$('#displayenrolled').append('<li><a href="pages/editgrade.html" onclick="shownameoneditgrade('+datas[i].studentID+');" class="item-link item-content item-inner item-title">('+datas[i].section+') '+datas[i].fname+' '+datas[i].mi+' '+datas[i].lname+'<div class="item-after"><span class="badge color-pink">'+datas[i].grade+'</span></div></a></li>');
+				}else{
+				$$('#displayenrolled').append('<li><a href="pages/editgrade.html" onclick="shownameoneditgrade('+datas[i].studentID+');" class="item-link item-content item-inner item-title">('+datas[i].section+') '+datas[i].fname+' '+datas[i].mi+' '+datas[i].lname+'<div class="item-after"><span class="badge color-pink">0</span></div></a></li>');
+			}
+			}
+			
+			
+			
+			
+		}
+	},JSON);
+})
+}
+
+function teacherremoveenrolled(courseid){
+$$(document).on('pageAfterAnimation','.page[data-page="removestudents"]',function(e){
 
 	$$.post(global_url, {action: 'displayenrolled', sub: courseid}, function (data,status) {
 		
@@ -417,26 +483,25 @@ $$(document).on('pageAfterAnimation','.page[data-page="enrolledstudents"]',funct
 		console.log(datas);
 		
 		for(var i = 0; i<datas.length; i++){
-			if(datas[i].grade == 1.00 || datas[i].grade == 1.25 || datas[i].grade == 1.50 || datas[i].grade ==  1.75){
-				$$('#displayenrolled').append('<li><a href="pages/editgrade.html" onclick="shownameoneditgrade('+datas[i].studentID+');" class="item-link item-content item-inner item-title">('+datas[i].section+') '+datas[i].fname+' '+datas[i].mi+' '+datas[i].lname+'<div class="item-after"><span class="badge color-green">'+datas[i].grade+'</span></div></a></li>');
-			}else if(datas[i].grade == 2.00 || datas[i].grade == 2.25 || datas[i].grade == 2.50 || datas[i].grade == 2.75){
-				$$('#displayenrolled').append('<li><a href="pages/editgrade.html" onclick="shownameoneditgrade('+datas[i].studentID+');" class="item-link item-content item-inner item-title">('+datas[i].section+') '+datas[i].fname+' '+datas[i].mi+' '+datas[i].lname+'<div class="item-after"><span class="badge color-blue">'+datas[i].grade+'</span></div></a></li>');
-			}else if(datas[i].grade == 3.00){
-				$$('#displayenrolled').append('<li><a href="pages/editgrade.html" onclick="shownameoneditgrade('+datas[i].studentID+');" class="item-link item-content item-inner item-title">('+datas[i].section+') '+datas[i].fname+' '+datas[i].mi+' '+datas[i].lname+'<div class="item-after"><span class="badge color-orange">'+datas[i].grade+'</span></div></a></li>');
-			}else if(datas[i].grade == 5.00){
-				$$('#displayenrolled').append('<li><a href="pages/editgrade.html" onclick="shownameoneditgrade('+datas[i].studentID+');" class="item-link item-content item-inner item-title">('+datas[i].section+') '+datas[i].fname+' '+datas[i].mi+' '+datas[i].lname+'<div class="item-after"><span class="badge color-red">'+datas[i].grade+'</span></div></a></li>');
-			}else if(datas[i].grade == "INC"){
-				$$('#displayenrolled').append('<li><a href="pages/editgrade.html" onclick="shownameoneditgrade('+datas[i].studentID+');" class="item-link item-content item-inner item-title">('+datas[i].section+') '+datas[i].fname+' '+datas[i].mi+' '+datas[i].lname+'<div class="item-after"><span class="badge">'+datas[i].grade+'</span></div></a></li>');
-			}else if(datas[i].grade == "0"){
-				$$('#displayenrolled').append('<li><a href="pages/editgrade.html" onclick="shownameoneditgrade('+datas[i].studentID+');" class="item-link item-content item-inner item-title">('+datas[i].section+') '+datas[i].fname+' '+datas[i].mi+' '+datas[i].lname+'<div class="item-after"><span class="badge color-pink">'+datas[i].grade+'</span></div></a></li>');
-			}else{
-				$$('#displayenrolled').append('<li><a href="pages/editgrade.html" onclick="shownameoneditgrade('+datas[i].studentID+');" class="item-link item-content item-inner item-title">('+datas[i].section+') '+datas[i].fname+' '+datas[i].mi+' '+datas[i].lname+'<div class="item-after"><span class="badge color-pink">0</span></div></a></li>');
-			}
-			
-			
+			$$('#displayenrolled').append('<li><a href="#" onclick="removestudent('+datas[i].studentID+');" class="item-link item-content item-inner item-title">('+datas[i].section+') '+datas[i].fname+' '+datas[i].mi+' '+datas[i].lname+'</a></li>');	
 		}
 	},JSON);
 })
+}
+
+function removestudent(studentid){
+
+	myApp.confirm('Remove this student from this subject?', function () {
+		
+		$$.post(global_url, {action: 'removestudent', studid: studentid}, function (data,status) {
+			
+			console.log(data);
+			myApp.alert('<center><strong>Successfully removed</strong></center>');
+			
+		},JSON);
+        
+    });
+
 }
 
 function shownameoneditgrade(studid){
@@ -546,39 +611,6 @@ function viewteachersubjects(id){
 }
 
 
-/* function chairmanshowsection(courseid,tid){
-
-	myApp.alert(courseid);
-	myApp.alert(tid);
-$$(document).on('pageAfterAnimation','.page[data-page="chairmansubjectsection"]',function(e){
-	
-	$$.post(global_url, {action: 'displaysections', courseid: cid, year: yr}, function (data,status) {
-		
-		document.getElementById('display_sections').innerHTML="";
-		document.getElementById('display_coursetitle').innerHTML = "";
-		console.log(data);
-		var datas = JSON.parse(data);
-		console.log(datas);
-		
-		for(var i = 0; i<datas.length; i++){
-		
-		var varsec = String(datas[i].sectionName);
-		
-			$$('#display_coursetitle').append(''+datas[i].coursetitle+'<br>');
-			
-			$$('#display_sections').append('<li><a href="pages/sectionstudents.html" onclick="displaysectionstudents('+datas[i].sectionid+','+cid+');" class="item-link item-content item-inner item-title">'+datas[i].section+'</a></li>');
-			//$$('#display_sections').append('<li><a href="pages/chairmangrade.html" onclick="alertsection('+datas[i].section+','+cid+');" class="item-link item-content item-inner item-title">'+datas[i].section+'</a></li>');
-			//$$('#display_sections').append('<li><a href="pages/chairmangrade.html" onclick="myApp.alert('+datas[i].section+','+cid+');" class="item-link item-content item-inner item-title">'+datas[i].section+'</a></li>');
-			
-		}
-
-
-	},JSON);
-
-})
-}   */
-
-
 function displaysectionstudents(cid, tid){
 	$$(document).on('pageAfterAnimation','.page[data-page="sectionstudents"]',function(e){		
 		
@@ -634,6 +666,146 @@ function displaysectionstudents(cid, tid){
 
 
 
+
+
+
+
+
+
+
+
+
+function studentrenewinfo(){
+	
+	var studentprof = localStorage.getItem("studentprofile");
+	var student = JSON.parse(studentprof);
+	var sid = student.studentID;
+	
+	var firstname = document.getElementById("fnameinput").value;
+	var lastname = document.getElementById("lnameinput").value;
+	var middlei = document.getElementById("miinput").value;
+	var suname = document.getElementById("usernameinput").value;
+	var spassword = document.getElementById("passwordinput").value;
+	
+	$$.post(global_url, {action: 'studentrenewinfo',studentid: sid, fname: firstname, lname: lastname, mi: middlei, username: suname, password: spassword}, function (data) {
+		
+		console.log(data);
+		myApp.alert('<center><strong>Account Successfully<br>Updated</strong></center>');
+		
+	},JSON);
+	
+}
+
+function studentsetting(){
+
+	$$(document).on('pageAfterAnimation','.page[data-page="studentsetting"]',function(e){
+
+	var studentprof = localStorage.getItem("studentprofile");
+	var student = JSON.parse(studentprof);
+	var sid = student.studentID;
+	
+	var fname = student.fname;
+	var lname = student.lname;
+	var mi = student.mi;
+	var suname = student.username;
+	var spassword = student.pass;
+	
+	document.getElementById("fnameinput").value = fname;
+	document.getElementById("lnameinput").value = lname;
+	document.getElementById("miinput").value = mi;
+	document.getElementById("usernameinput").value = suname;
+	document.getElementById("passwordinput").value = spassword;
+    
+    })
+}
+
+
+
+function teacherrenewinfo(){
+	
+	var teacherprof = localStorage.getItem("teacherprofile");
+	var teacher = JSON.parse(teacherprof);
+	var teacherid = teacher.teacherid;
+	
+	var firstname = document.getElementById("fnameinput").value;
+	var lastname = document.getElementById("lnameinput").value;
+	var middlei = document.getElementById("miinput").value;
+	var tuname = document.getElementById("usernameinput").value;
+	var tpassword = document.getElementById("passwordinput").value;
+	
+	$$.post(global_url, {action: 'teacherrenewinfo',tid: teacherid, fname: firstname, lname: lastname, mi: middlei, username: tuname, password: tpassword}, function (data) {
+		
+		console.log(data);
+		myApp.alert('<center><strong>Account Successfully<br>Updated</strong></center>');
+		
+	},JSON);
+	
+}
+
+function teachersetting(){
+
+	$$(document).on('pageAfterAnimation','.page[data-page="teachersetting"]',function(e){
+
+	var teacherprof = localStorage.getItem("teacherprofile");
+	var teacher = JSON.parse(teacherprof);
+	var teacherid = teacher.teacherid;
+	
+	var fname = teacher.fname;
+	var lname = teacher.lname;
+	var mi = teacher.mi;
+	var tuname = teacher.username;
+	var tpassword = teacher.pass; 
+	
+	document.getElementById("fnameinput").value = fname;
+	document.getElementById("lnameinput").value = lname;
+	document.getElementById("miinput").value = mi;
+	document.getElementById("usernameinput").value = tuname;
+	document.getElementById("passwordinput").value = tpassword;
+    
+    })
+}
+
+
+function chairmanrenewinfo(){
+	
+	var chairmanprof = localStorage.getItem("chairmanprofile");
+	var chairman = JSON.parse(chairmanprof);
+	var chairmanid = chairman.userid;
+	
+	var fname = document.getElementById("fnameinput").value;
+	var lname = document.getElementById("lnameinput").value;
+	var cuname = document.getElementById("usernameinput").value;
+	var cpassword = document.getElementById("passwordinput").value;
+	
+	$$.post(global_url, {action: 'chairmanrenewinfo',cid: chairmanid, firstname: fname, lastname: lname, username: cuname, password: cpassword}, function (data) {
+		
+		console.log(data);
+		myApp.alert('<center><strong>Account Successfully<br>Updated</strong></center>');
+		
+	},JSON);
+	
+}
+
+function chairmansetting(){
+
+	$$(document).on('pageAfterAnimation','.page[data-page="chairmansetting"]',function(e){
+
+	var chairmanprof = localStorage.getItem("chairmanprofile");
+	var chairman = JSON.parse(chairmanprof);
+	var chairmanid = chairman.userid;
+
+	var fname = chairman.firstname;
+	var lname = chairman.lastname;
+	var cuname = chairman.username;
+	var cpassword = chairman.pass; 
+
+	document.getElementById("fnameinput").value = fname;
+	document.getElementById("lnameinput").value = lname;
+	document.getElementById("usernameinput").value = cuname;
+	document.getElementById("passwordinput").value = cpassword;
+    
+    })
+}
 
 
 
